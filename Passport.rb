@@ -42,8 +42,9 @@ class Passport
   end
 
   def toString
-    retString = @id + "-" + @firstName + "-" + @middleName + "-" + @lastName + "-" + @dateOfBirth 
-    retString += @
+    retString = "Holder:" + @id + "-" + @firstName + "-" + @middleName + "-" + @lastName + "-" + @dateOfBirth + "\n"
+    retString += @useRecords.toString 
+    return retString
   end
 
 end
