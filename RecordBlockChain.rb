@@ -37,6 +37,19 @@ class RecordBlockChain
 
   end
 
+  def toString
+    retString = ""
+    # for loop starts at 1 because block at index 0 is root/genesis block
+    for i in 1..@size-1
+      retString += "\t" + @blocks[i].toString
+      if i != @size-1
+        retString += "\n"
+      end
+    end
+    
+    return retString
+  end
+
   class RecordBlock
 
     attr_accessor :location, :date, :previousHash
@@ -63,5 +76,8 @@ class RecordBlockChain
       return @date
     end
 
+    def toString
+      return @location + "-" + @date + "-" + @previousHash
+    end
   end
 end
