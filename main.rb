@@ -1,32 +1,29 @@
-#testing scripts
+require_relative 'model/test/test.rb'
 
+require 'sinatra'
 
-require_relative 'Passport.rb'
+set :protection, :except => :frame_options
+set :bind, '0.0.0.0'
 
-testPass = Passport.new("asreedh", "Aneesh", "N/A", "Sreedhara", "02/13/2003")
+get "/" do
+  @email = params["email"]
 
-puts testPass.getId
-puts testPass.getFirstName
-puts testPass.getMiddleName
-puts testPass.getLastName
-puts testPass.getDateOfBirth
+   erb:create, :locals => { host: request.host }
+end
 
-testPass.addUseRecord("Geneva", "01/01/2020")
-testPass.addUseRecord("Jakarta", "01/01/2020")
+post "/" do 
+  @email = params["email"]
+  "This is the"
+end
 
-useRecords = testPass.getUseRecords
-blockArray = useRecords.blocks
+get '/admin' do
+ erb:admin, :locals => { host: request.host }
+end
 
-puts blockArray[1].getLocation
-puts blockArray[1].getDate
-puts blockArray[2].getLocation
-puts blockArray[2].getDate
-puts useRecords.isValidChain
+get '/trips' do 
+  erb:trips, :locals => { host: request.host }
+end
 
-blockArray[1].location = "totally not Geneva lol"
-puts useRecords.isValidChain
+require_relative 'console-implementation/ConsoleImplementation.rb'
 
-blockArray[1].location = "Geneva"
-puts useRecords.isValidChain
-
-puts testPass.toString
+ConsoleImplementation.new
